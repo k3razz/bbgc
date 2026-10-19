@@ -1,0 +1,132 @@
+// csgo_gc config.txt
+// KeyValues format like items_game.txt
+// Top level has no wrapper
+// Changes are picked up on the fly CheckFileReloads once per frame
+
+// RANKS AND PROFILE
+// All ranks are optional
+// If has_prime is 0 ranks level and XP are reset
+
+"ranks"
+{
+    // Competitive 0 means none 1 means Silver 1 ... 18 means Global Elite
+    "competitive_rank"    "18"
+    "competitive_wins"    "100"
+
+    // Wingman 0 means none 1 means Silver 1 ... 18 means Global Elite
+    "wingman_rank"        "18"
+    "wingman_wins"        "200"
+
+    // Danger Zone 0 means none 1 means Rat 1 ... 15 means Howling Alpha
+    "dangerzone_rank"     "15"
+    "dangerzone_wins"     "300"
+}
+
+// CS GO profile level and current XP 0 to 4999 within the level
+"player_level"    "39"
+"player_cur_xp"   "4999"
+
+// Commendations shown in the profile
+"cmd_friendly"    "1000"
+"cmd_teaching"    "2000"
+"cmd_leader"      "3000"
+
+// ACCOUNT STATE
+
+// Show the player as VAC banned
+"vac_banned"      "0"
+
+// Prime status If 0 ranks level XP are reset during parsing
+"has_prime"       "1"
+
+// Competitive cooldown duration in seconds 0 means disabled
+// When enabled blocks search sends UI cooldown and updates MatchmakingHello
+"competitive_cooldown_seconds" "60"
+
+// Cooldown reason value sent in penalty_reason
+"competitive_cooldown_reason" "12"
+// 1  = kicked ("You were kicked from the last match")
+// 2  = RAMPAGE on teammates ("You killed too many teammates")
+// 3  = killed a teammate at round start ("You killed a teammate at round start")
+// 4  = didn't reconnect ("You failed to reconnect to the last match")
+// 5  = left the game ("You abandoned the last match")
+// 6  = too much damage on teammates ("You did too much damage to your teammates")
+// 7  = too much damage on teammates at round start ("You did too much damage to your teammates at round start")
+// 8  = GLOBAL BAN (untrusted) ("This account is permanently Untrusted")
+// 9  = kicked too much ("You were kicked from too many recent matches")
+// 10 = Overwatch ban (cheat) ("Convicted by Overwatch - Majorly Disruptive")
+// 11 = Overwatch ban (grief) ("Convicted by Overwatch - Minorly Disruptive")
+// 12 and 13 = checking if account can queue ("Resolving matchmaking state for your account")
+// 14 = ban for "" (global)
+// 15 and 16 = Power cut timings ("You failed to connect by match start.")
+// 17 = stop kicking people ffs ("You have kicked too many teammates in recent matches")
+// 18 = uhhhh ("Congratulations on your recent competitive wins! Before you play competitive matches further please wait for matchmaking servers to calibrate your Skill Group placement based on your latest performance.")
+// 19 and 20 = WHY THE FUCK (global) ("You have received significantly more griefing reports than most players.")
+// 21 = WHY THE FUCK (competitive only) ("You have received significantly more griefing reports than most players.")
+// 22 and beyond = same as 14, but competitive only
+
+
+// REGION AND CURRENCY
+
+// Two letter country code "RU" "US" "DE" "UA" ...
+"country"  "RU"
+
+// Store currency (ISO numeric IDs):
+//  1 USD 	  2 GBP 	  3 EUR 	  4 CHF 	  5 RUB 	  6 JPY
+//  7 BRL 	  8 NOK 	  9 IDR 	 10 MYR 	 11 PHP 	 12 SGD
+// 13 THB 	 14 VND 	 15 KRW 	 16 TRY 	 17 UAH 	 18 MXN
+// 19 CAD 	 20 AUD 	 21 NZD 	 22 CNY 	 23 INR 	 24 CLP
+// 25 PEN 	 26 COP 	 27 ZAR 	 28 HKD 	 29 TWD 	 30 SAR
+// 31 AED 	 32 ARS 	 33 ILS 	 34 BYN 	 35 KZT 	 36 KWD
+// 37 QAR 	 38 CRC 	 39 UYU 	 40 BGN 	 41 HRK 	 42 CZK
+// 43 DKK 	 44 HUF 	 45 PLN 	 46 RON 	 47 SEK	
+"currency" "5"
+
+// CASES AND ITEMS
+
+// Force max rarity when opening cases for tests
+"force_max_rarity"     "1"
+
+// Destroy used items keys cases stickers tags passes
+"destroy_used_items"   "0"
+
+// Randomize float wear of new items from cases
+"randomize_item_float" "1"
+
+// Rarity weights when opening cases Key is rarity number value is weight
+// The higher the weight the more often the rarity drops Missing key means 0
+// Valve defaults
+"rarity_weights"
+{
+    "1"  "10000000"   // Common
+    "2"  "2000000"    // Uncommon
+    "3"  "400000"     // Rare
+    "4"  "80000"      // Mythical
+    "5"  "16000"      // Legendary
+    "6"  "3200"       // Ancient
+    "99" "1280"       // Unusual knives gloves
+}
+
+// FRIENDS
+// Used in Party Search and Recent Teammates
+// Key is account id value is not read for clarity
+//
+// AccountID is SteamID64 minus 76561197960265728
+// or equivalent steamID64 lower 32 bits
+
+"friends"
+{
+    "1124236885" "1"
+    "1140104601" "2"
+    "22202"      "3"
+}
+
+// STEAM APP ID
+
+// App id under which the game is launched csgo steam.inf is automatically
+// patched if needed and the SteamAppId environment variable is also set
+// This is the only thing you need to change to switch appid
+"appid_override" "4465480" // new csgo appid
+
+// Show only servers with the tag csgo_gc in the server browser
+"show_csgo_gc_servers_only" "1"

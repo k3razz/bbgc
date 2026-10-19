@@ -1,0 +1,114 @@
+# Normalize line endings on checkin/checkout
+* text=auto
+
+# C/C++ source and headers
+*.c       text
+*.cc      text
+*.cpp     text
+*.cxx     text
+*.h       text
+*.hh      text
+*.hpp     text
+*.hxx     text
+*.inl     text
+*.inc     text
+*.ipp     text
+*.proto   text
+*.pb.cc   text
+*.pb.h    text
+*.asm     text
+*.S       text
+*.s       text
+*.def     text
+*.rc      text
+
+# Build system
+CMakeLists.txt text
+*.cmake        text
+*.ninja        text
+Makefile       text
+GNUmakefile    text
+*.mk           text
+
+# Scripts
+*.sh      text eol=lf
+*.bash    text eol=lf
+*.bat     text eol=crlf
+*.cmd     text eol=crlf
+*.ps1     text eol=crlf
+*.psm1    text eol=crlf
+
+# Windows project files
+*.sln              text eol=crlf
+*.vcxproj          text eol=crlf
+*.vcxproj.filters  text eol=crlf
+*.props            text eol=crlf
+
+# Config/docs
+*.md      text
+*.txt     text
+*.yml     text
+*.yaml    text
+*.json    text
+*.xml     text
+*.ini     text
+*.cfg     text
+*.toml    text
+
+# Binary files
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.icns    binary
+*.bmp     binary
+*.tga     binary
+*.dds     binary
+*.psd     binary
+*.ttf     binary
+*.otf     binary
+*.woff    binary
+*.woff2   binary
+*.eot     binary
+*.pdf     binary
+*.zip     binary
+*.7z      binary
+*.rar     binary
+*.tar     binary
+*.gz      binary
+*.bz2     binary
+*.xz      binary
+*.exe     binary
+*.dll     binary
+*.so      binary
+*.dylib   binary
+*.a       binary
+*.lib     binary
+*.obj     binary
+*.o       binary
+*.pdb     binary
+*.ilk     binary
+*.exp     binary
+*.bin     binary
+*.pack    binary
+*.idx     binary
+*.rev     binary
+*.pch     binary
+*.graph   binary
+*.mp3     binary
+*.wav     binary
+*.ogg     binary
+*.mp4     binary
+*.webm    binary
+*.blend   binary
+*.fbx     binary
+
+# Generated / vendored files for GitHub language stats
+build/**                  linguist-generated=true
+release/**                linguist-generated=true
+protobufs/*.pb.cc         linguist-generated=true
+protobufs/*.pb.h          linguist-generated=true
+steamworks/sdk/**         linguist-vendored
+build/_deps/**            linguist-vendored
+third_party/**            linguist-vendored

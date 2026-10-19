@@ -1,0 +1,46 @@
+name: Regenerate Protobuf Files
+
+on:
+  workflow_dispatch:                 # Run manually from the Actions tab
+
+jobs:
+  regenerate:
+    runs-on: windows-2022            # Matches your build environment
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # ---------- Install protoc ----------
+    - name: Install protoc
+      shell: pwsh
+      run: |
+        $PROTOC_VERSION = "21.12"
+        $PROTOC_ZIP = "protoc-$PROTOC_VERSION-win64.zip"
+        $PROTOC_URL = "https://github.com/protocolbuffers/protobuf/releases/download/v$PROTOC_VERSION/$PROTOC_ZIP"
+        Invoke-WebRequest -Uri $PROTOC_URL -OutFile $PROTOC_ZIP
+        Expand-Archive -Path $PROTOC_ZIP -DestinationPath protoc
+        echo "$env:GITHUB_WORKSPACE\protoc\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    # ---------- Regenerate all .proto files ----------
+    - name: Regenerate C++ files from .proto
+      shell: bash
+      run: |
+        cd $GITHUB_WORKSPACE
+
+        # Find all .proto files in the root (adjust path if needed)
+        PROTO_FILES=$(find ./protobufs/ -maxdepth 1 -name "*.proto" -type f)
+        if [ -z "$PROTO_FILES" ]; then
+          echo "No .proto files found in the root; check path."
+          exit 1
+        fi
+
+        # Set include paths: current dir and protoc's built-in include
+        PROTO_INCLUDE="-I. -I$GITHUB_WORKSPACE/protobufs -I$GITHUB_WORKSPACE/protoc/include"
+
+        # Regenerate each .proto (protoc generates .pb.cc and .pb.h in the same directory)
+        for proto in $PROTO_FILES; do
+          echo "Generating for $proto"
+          protoc $PROTO_INCLUDE --cpp_out=. "$proto"
+        done
+
+        echo "All .proto files regenerated."
