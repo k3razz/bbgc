@@ -664,7 +664,6 @@ message CMsgGCCStrike15_v2_PlayerOverwatchCaseUpdate {
     optional uint32 rpt_speedhack = 7;
     optional uint32 rpt_teamharm = 8;
     optional uint32 reason = 9;
-    optional uint32 verdict = 10;
 }
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment {
