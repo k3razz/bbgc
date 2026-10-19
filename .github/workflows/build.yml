@@ -1,4 +1,3 @@
-
 name: Build
 
 on:
@@ -27,6 +26,31 @@ jobs:
       uses: ilammy/msvc-dev-cmd@v1
       with:
         arch: x86
+
+    - name: Download Steamworks SDK (CI build)
+      shell: pwsh
+      run: |
+        $sdkUrl = "https://github.com/julianxhokaxhiu/SteamworksSDKCI/archive/refs/tags/1.64.zip"
+        $sdkZip = "${{ github.workspace }}/steamworks_sdk_ci.zip"
+        $sdkTmp = "${{ github.workspace }}/steamworks_sdk_tmp"
+        $dest   = "${{ github.workspace }}/steamworks/sdk"
+
+        Invoke-WebRequest -Uri $sdkUrl -OutFile $sdkZip
+        Expand-Archive -Path $sdkZip -DestinationPath $sdkTmp -Force
+
+        # SteamworksSDKCI extracts to <root>/SteamworksSDKCI-<tag>/steamworks_sdk
+        $inner = Get-ChildItem $sdkTmp -Directory | Select-Object -First 1
+        if (-not $inner) { throw "SteamworksSDKCI archive did not contain a directory" }
+        $src = Join-Path $inner.FullName "steamworks_sdk"
+        if (-not (Test-Path $src)) { throw "steamworks_sdk folder not found in archive" }
+
+        New-Item -ItemType Directory -Force -Path $dest | Out-Null
+        Copy-Item -Recurse -Force "$src/*" $dest
+
+        if (-not (Test-Path (Join-Path $dest "redistributable_bin/steam_api.lib"))) {
+          throw "steam_api.lib missing after SDK copy"
+        }
+        Write-Host "Steamworks SDK installed to $dest"
 
     - name: Cache FetchContent deps
       uses: actions/cache@v4
